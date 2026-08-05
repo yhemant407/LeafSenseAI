@@ -1,21 +1,19 @@
 from fastapi import FastAPI
 
+from app.api.router import router
+
 app = FastAPI(
-    title="Plant Disease Classifier API",
+    title="LeafSense AI API",
     version="1.0.0",
-    description="AI-powered API for detecting plant diseases from leaf images."
+    description="AI-powered plant disease detection service."
 )
 
 
-@app.get("/")
+app.include_router(router)
+
+
+@app.get("/", tags=["Root"])
 def root():
     return {
-        "message": "Plant Disease Classifier API is running!"
-    }
-
-
-@app.get("/health")
-def health():
-    return {
-        "status": "healthy"
+        "message": "LeafSense AI API is running!"
     }
